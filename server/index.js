@@ -6,6 +6,8 @@ const { ObjectID } = require('mongodb');
 const app = new Koa();
 const router = new Router();
 const PetinfoAPI = require('./PetinfoAPI'); // PetinfoAPI 폴더에서 라우터 요청
+const http = require('http');
+const hostname = "125.128.219.33";
 
 const mongoose = require('mongoose'); //MongoDB를 사용한다고 선언한다.
 const bodyParser = require('koa-bodyparser'); // koa-bodyparser 사용하기위해 선언
@@ -33,6 +35,6 @@ router.use('/PetinfoAPI',PetinfoAPI.routes()); //PetinfoAPI경로를 /PetinfoAPI
 
 app.use(router.routes()).use(router.allowedMethods);
 
-app.listen(port, () => { // .env에서 설정된 포트번호로 연결한다.
-    console.log('Dog server is listening to port ' + port);
+app.listen(port,hostname, () => { // .env에서 설정된 포트번호로 연결한다.
+    console.log(`Dog server is listening at http://${hostname}:${port}/`);
 });

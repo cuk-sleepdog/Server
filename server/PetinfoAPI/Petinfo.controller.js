@@ -35,7 +35,7 @@ exports.PetPost = async (ctx) => {
         Kind,
         Gender,
         Weight
-    } = ctx.request.body;
+    } = ctx.request.body; 
 
     const petinfo = new Petinfo({
         Petname,
@@ -46,7 +46,7 @@ exports.PetPost = async (ctx) => {
     });
 
     try {
-        await petinfo.save();
+        await petinfo.save(); //몽고DB에 넣는작업
     } catch(e) {
 
         // http 상태 500(에러)와 error메시지 반환하고 에러를 기록한다.
