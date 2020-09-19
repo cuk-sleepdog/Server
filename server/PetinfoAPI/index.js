@@ -14,6 +14,7 @@ Petinfo.get('/:Petname',PetCtrl.Petget); // Petname값으로 골라와서 출력
 Petinfo.post('/',PetCtrl.PetPost); // Petinfo 정보 입력
 Petinfo.put('/:id',PetCtrl.PetPut); // Petinfo 정보 수정
 Petinfo.delete('/:id',PetCtrl.Petdelete); // Petinfo 데이터 삭제
+
 module.exports = Petinfo;
 
 //여기서 설정된걸 server index.js 에서 가져다 쓴다.

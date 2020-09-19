@@ -3,26 +3,32 @@ const { Schema } = mongoose; // 몽구스 에서 스키마를 사용한다.
 
 const User = new Schema({ //서브다큐먼트 
     //주 다큐먼트에 추가로 붙여쓸수있는 서브다큐먼트 이다.
-    Kakao: String, //user의 카카오 id
-    Dog: [String] // 유저가 키우는 강아지들
+    KakaoId: String, //user의 카카오 id
+    accessToken: String, // 카카오 토큰
+    Dogs: String// 유저가 키우는 강아지들
 });
 
 const Health = new Schema({ //건강상태 데이터베이스
     //서브다큐먼트 사용
     Users : [User],
-    heat: Number,
-    heart: Number,
-    age: Number,
-    createAt:{ //기본값 설정할땐 꼭 객체로 , 생성날짜
+    Heat: Number,
+    Heart: Number,
+    CreateAt:{ //기본값 설정할땐 꼭 객체로 , 생성날짜
         type: Date,
         default: Date.now()
     }
 });
-
+ /*
+******************************************
+과연 이 User와 Health를 합치는게 맞는가? 
+분리하는게 더 낫지 않을까?
+****************************************
+ */
 
 
 //스키마를 모델로 변환하여 내보내서 다른 파일에서 사용할수있게 한다.
 module.exports = mongoose.model('Health',Health,'Health');
+//module.exports = mongoose.model('User',User,'User');
 // 첫번째는 스키마의 이름, 두번째는 스키마 객체가 필요하다.
 // mongoose.model('Book', Book, 'Book'); 이라고하면 몽고디비의 컨벤션을 따르지않고 Book으로 만들수있다.
 

@@ -6,6 +6,7 @@ const { ObjectID } = require('mongodb');
 const app = new Koa();
 const router = new Router();
 const PetinfoAPI = require('./PetinfoAPI'); // PetinfoAPI 폴더에서 라우터 요청
+const HealthAPI = require('./HealthAPI');
 const http = require('http');
 const hostname = "125.128.219.33";
 
@@ -32,9 +33,10 @@ app.use(bodyParser()); // 바디파서 적용, 라우터 적용코드보다 위�
 
 router.use('/PetinfoAPI',PetinfoAPI.routes()); //PetinfoAPI경로를 /PetinfoAPI 경로 하위 라우트로 설정
 //걍 쉽게말해서 server에서 쓸수있게 연결해준거임
+router.use('/HealthAPI',HealthAPI.routes());
 
 app.use(router.routes()).use(router.allowedMethods);
 
-app.listen(port,hostname, () => { // .env에서 설정된 포트번호로 연결한다.
-    console.log(`Dog server is listening at http://${hostname}:${port}/`);
+app.listen(port, () => { // .env에서 설정된 포트번호로 연결한다.
+    console.log(`Dog server is listening at ${port}/`);
 });
