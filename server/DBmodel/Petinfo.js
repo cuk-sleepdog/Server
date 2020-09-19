@@ -11,4 +11,6 @@ const Petinfo = new Schema({ // 반려동물 정보
     Weight : Number // 몸무게
 });
 
+
+
 module.exports = mongoose.model('Petinfo',Petinfo,'Petinfo');

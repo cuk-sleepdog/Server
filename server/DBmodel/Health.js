@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose; // 몽구스 에서 스키마를 사용한다.
 
+
 const User = new Schema({ //서브다큐먼트 
     //주 다큐먼트에 추가로 붙여쓸수있는 서브다큐먼트 이다.
     KakaoId: String, //user의 카카오 id
@@ -25,10 +26,9 @@ const Health = new Schema({ //건강상태 데이터베이스
 ****************************************
  */
 
-
 //스키마를 모델로 변환하여 내보내서 다른 파일에서 사용할수있게 한다.
 module.exports = mongoose.model('Health',Health,'Health');
-//module.exports = mongoose.model('User',User,'User');
+
 // 첫번째는 스키마의 이름, 두번째는 스키마 객체가 필요하다.
 // mongoose.model('Book', Book, 'Book'); 이라고하면 몽고디비의 컨벤션을 따르지않고 Book으로 만들수있다.
 
