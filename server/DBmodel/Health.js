@@ -6,7 +6,7 @@ const Health = new Schema({ //건강상태 데이터베이스
     //서브다큐먼트 사용
     User : [{
         KakaoId: String, //user의 카카오 id
-    accessToken: String, // 카카오 토큰
+    //accessToken: String, // 카카오 토큰
     Dogs: String// 유저가 키우는 강아지들
     }],
     Heat: Number,
