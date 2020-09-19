@@ -29,14 +29,14 @@ exports.Healthlist = async (ctx) => {
 exports.HealthPost = async (ctx) => {
     // request body 에서 값들을 추출한다.
     const {
-        Users,
+        User,
         Heat,
         Heart,
         CreateAt
     } = ctx.request.body; 
 
     const health = new Health({
-        Users,
+        User,
         Heat,
         Heart,
         CreateAt
@@ -58,7 +58,7 @@ exports.HealthPost = async (ctx) => {
 exports.Healthget = async (ctx) => {
     const {id} = ctx.params; //URL 파라미터에서 id값을 읽어온다.
      // Users의 KakaoId로 조회할수있게 수정해야함.
-     
+
     let healthinfo;
 
     try {
@@ -108,14 +108,13 @@ exports.HealthPut = async (ctx) => {
     const schema = Joi.object().keys({
 
         //required() 옵션은 필수 항목, NOT NULL과 동일
-        Users: Joi.array().items(Joi.object().keys({
-            Kakao: Joi.string().email().required(),
+        User: Joi.array().items(Joi.object().keys({
+            KakaoId: Joi.string().email().required(),
+            accessToken: Joi.string().required(),
             Dogs: Joi.string().required()
         })),
-        Heat: Joi.date(),
-        Heart: Joi.string().required(),
-        CreateAt: Joi.string().required(),
-
+        Heat: Joi.number().required(),
+        Heart: Joi.number().required()
     });
 
     const validation = schema.validate(ctx.request.body);
@@ -140,7 +139,27 @@ exports.HealthPut = async (ctx) => {
     ctx.body = healthinfo;
     };
 
-exports.update = (ctx) => {
-    ctx.body = 'update';
-};
+    exports.Infoupdate = async (ctx) => {
+        const {id} = ctx.params;
+    
+        if(!ObjectId.isValid(id)) {
+            ctx.status = 400; // Bad Request
+            return;
+        }
+    
+        let Info;
+    
+        try {
+            // 아이디로 찾아서 업데이트를 합니다.
+            // 파라미터는 (아이디, 변경 할 값, 설정) 순 입니다.
+            Info = await Health.findByIdAndUpdate(id, ctx.request.body, {
+                // upsert 의 기본값은 false이다. PUT과는 다르게 생성된 데이터를 수정하는 것이므로 true로 할 필요가없다.
+                new: true 
+            });
+        } catch (e) {
+            return ctx.throw(500, e);
+        }
+    
+        ctx.body = Info;
+    };
 

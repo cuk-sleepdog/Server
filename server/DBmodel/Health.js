@@ -2,16 +2,13 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose; // 몽구스 에서 스키마를 사용한다.
 
 
-const User = new Schema({ //서브다큐먼트 
-    //주 다큐먼트에 추가로 붙여쓸수있는 서브다큐먼트 이다.
-    KakaoId: String, //user의 카카오 id
-    accessToken: String, // 카카오 토큰
-    Dogs: String// 유저가 키우는 강아지들
-});
-
 const Health = new Schema({ //건강상태 데이터베이스
     //서브다큐먼트 사용
-    Users : [User],
+    User : [{
+        KakaoId: String, //user의 카카오 id
+    accessToken: String, // 카카오 토큰
+    Dogs: String// 유저가 키우는 강아지들
+    }],
     Heat: Number,
     Heart: Number,
     CreateAt:{ //기본값 설정할땐 꼭 객체로 , 생성날짜
