@@ -60,11 +60,11 @@ exports.PetPost = async (ctx) => {
 
 exports.Petget = async (ctx) => {
     const {id} = ctx.params; //URL 파라미터에서 id값을 읽어온다.
-
+    console.log(id);
     let petinfo;
-
+    
     try {
-        petinfo = await Petinfo.findById(id).exec(); //특정아이디 조회
+        petinfo = await Petinfo.find({Petname: new RegExp(id)}).exec(); //특정아이디 조회
     } catch(e){
         if(e.name === 'CastError'){
             ctx.status = 400;
