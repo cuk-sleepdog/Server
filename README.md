@@ -4,7 +4,7 @@
 
 ### Petinfo
 API | Method | Address
-:--- |:-------:|:-----|
+:-----|:------:|:------|
 반려동물 정보입력 API | POST | sleepdog.mintpass.kr:3000/PetinfoAPI/ |
 반려동물 정보 LIST API | GET | sleepdog.mintpass.kr:3000/PetinfoAPI/ |
 반려동물 이름 선택해서 출력 | GET | sleepdog.mintpass.kr:3000/PetinfoAPI/:Petname |
@@ -13,7 +13,7 @@ API | Method | Address
 
 ### Health
 API | Method | Address
-:---|:------:|:------|
+:-----|:------:|:------|
 유저정보,건강상태 정보입력 API| POST | sleepdog.mintpass.kr:3000/Health/ |
 건강상태 정보 LIST API | GET | sleepdog.mintpass.kr:3000/Health/ |
 id선택해서 건강상태 출력 API | GET | sleepdog.mintpass.kr:3000/Health/:id |
