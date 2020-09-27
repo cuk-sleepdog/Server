@@ -1,19 +1,21 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose; // 몽구스 에서 스키마를 사용한다.
+const moment = require('moment');
+const Today = new Date();
 const autoIncrement = require('mongoose-auto-increment');
-
 const connection = mongoose.createConnection("mongodb://localhost/Ju");
+
 autoIncrement.initialize(connection);
 
 
 const Health = new Schema({ //건강상태 데이터베이스
     //서브다큐먼트 사용
-    HealthId: Number,
+    seq: Number,
     Heat: Number,
     Heart: Number,
     CreateAt:{ //기본값 설정할땐 꼭 객체로 , 생성날짜
-        type: Date,
-        default: Date.now()
+        type: String,
+        default: moment(Today).format('YYYY-MM-DD, h:mm:ss a')
     },
 },
 {versionKey: false}
@@ -22,7 +24,7 @@ const Health = new Schema({ //건강상태 데이터베이스
 
 Health.plugin(autoIncrement.plugin,{
     model: 'Health',
-    field: 'HealthId',
+    field: 'seq',
     startAt: 0,
     incrementBy : 1
 });

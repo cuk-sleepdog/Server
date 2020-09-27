@@ -30,6 +30,7 @@ exports.Petlist = async (ctx) => {
 exports.PetPost = async (ctx) => {
     // request body 에서 값들을 추출한다.
     const {
+        User,
         Petname,
         Happy,
         Kind,
@@ -38,6 +39,7 @@ exports.PetPost = async (ctx) => {
     } = ctx.request.body; 
 
     const petinfo = new Petinfo({
+        User,
         Petname,
         Happy,
         Kind,
