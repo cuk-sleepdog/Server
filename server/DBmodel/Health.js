@@ -9,19 +9,16 @@ autoIncrement.initialize(connection);
 const Health = new Schema({ //건강상태 데이터베이스
     //서브다큐먼트 사용
     seq: Number,
-    User : [{
-        KakaoId: String, //user의 카카오 id
-    //accessToken: String, // 카카오 토큰
-    Dogs: String// 유저가 키우는 강아지들
-    }],
     Heat: Number,
     Heart: Number,
     CreateAt:{ //기본값 설정할땐 꼭 객체로 , 생성날짜
         type: Date,
         default: Date.now()
     },
-    
-});
+},
+{versionKey: false}
+
+);
 
 Health.plugin(autoIncrement.plugin,{
     model: 'Health',
