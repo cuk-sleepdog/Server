@@ -7,13 +7,12 @@ const handler = (ctx, next) =>{
 };
 
 
-//Name.get('/',handler); // handler 출력 
+//Petinfo.get('/',PetCtrl.Petlist); // Petinfo.controller.js의 저장된것을 출력
 
-Petinfo.get('/',PetCtrl.Petlist); // Petinfo.controller.js의 저장된것을 출력
 Petinfo.get('/:id',PetCtrl.Petget); // Petname값으로 골라와서 출력
 Petinfo.post('/',PetCtrl.PetPost); // Petinfo 정보 입력
-Petinfo.put('/:id',PetCtrl.PetPut); // Petinfo 정보 수정
 Petinfo.delete('/:id',PetCtrl.Petdelete); // Petinfo 데이터 삭제
+Petinfo.patch('/:id',PetCtrl.UpdatePet); // Petinfo 정보 수정
 
 module.exports = Petinfo;
 

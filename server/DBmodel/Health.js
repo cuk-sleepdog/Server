@@ -8,7 +8,7 @@ autoIncrement.initialize(connection);
 
 const Health = new Schema({ //건강상태 데이터베이스
     //서브다큐먼트 사용
-    seq: Number,
+    HealthId: Number,
     Heat: Number,
     Heart: Number,
     CreateAt:{ //기본값 설정할땐 꼭 객체로 , 생성날짜
@@ -22,7 +22,7 @@ const Health = new Schema({ //건강상태 데이터베이스
 
 Health.plugin(autoIncrement.plugin,{
     model: 'Health',
-    field: 'seq',
+    field: 'HealthId',
     startAt: 0,
     incrementBy : 1
 });

@@ -16,7 +16,8 @@ const Petinfo = new Schema({ // 반려동물 정보
     Happy : Date, // 생일
     Kind : String, // 종류
     Gender : String, // 성별
-    Weight : Number // 몸무게
+    Weight : Number, // 몸무게
+    PetId : Number
 },
 {versionKey: false}
 
@@ -24,8 +25,8 @@ const Petinfo = new Schema({ // 반려동물 정보
 
 Petinfo.plugin(autoIncrement.plugin,{
     model: 'Petinfo',
-    field: 'seq',
-    startAt: 0,
+    field: 'PetId',
+    startAt: 1,
     incrementBy : 1
 });
 

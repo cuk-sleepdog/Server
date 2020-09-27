@@ -140,8 +140,28 @@ exports.PetPut = async (ctx) => {
     ctx.body = petinfo;
     };
 
-exports.update = (ctx) => {
-    ctx.body = 'update';
-};
+    exports.UpdatePet = async (ctx) => {
+        const {id} = ctx.params;
+    
+        if(!ObjectId.isValid(id)) {
+            ctx.status = 400; // Bad Request
+            return;
+        }
+    
+        let Pet;
+    
+        try {
+            // 아이디로 찾아서 업데이트를 합니다.
+            // 파라미터는 (아이디, 변경 할 값, 설정) 순 입니다.
+            Pet = await Petinfo.findByIdAndUpdate(id, ctx.request.body, {
+                // upsert 의 기본값은 false이다. PUT과는 다르게 생성된 데이터를 수정하는 것이므로 true로 할 필요가없다.
+                new: true 
+            });
+        } catch (e) {
+            return ctx.throw(500, e);
+        }
+    
+        ctx.body = Info;
+    };
 
 // 이 파일이랑 PetinfoAPI안에있는 index.js랑 왔다리갔다리 하면서 쓰면된다.
