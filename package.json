@@ -10,6 +10,7 @@
     "koa-bodyparser": "^4.3.0",
     "koa-router": "^9.4.0",
     "mongoose": "^5.10.5",
+    "mongoose-auto-increment": "^5.0.1",
     "passport-kakao": "^1.0.0"
   },
   "scripts": {

@@ -1,9 +1,14 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose; // 몽구스 에서 스키마를 사용한다.
+const autoIncrement = require('mongoose-auto-increment');
+
+const connection = mongoose.createConnection("mongodb://localhost/Ju");
+autoIncrement.initialize(connection);
 
 
 const Health = new Schema({ //건강상태 데이터베이스
     //서브다큐먼트 사용
+    seq: Number,
     User : [{
         KakaoId: String, //user의 카카오 id
     //accessToken: String, // 카카오 토큰
@@ -14,8 +19,17 @@ const Health = new Schema({ //건강상태 데이터베이스
     CreateAt:{ //기본값 설정할땐 꼭 객체로 , 생성날짜
         type: Date,
         default: Date.now()
-    }
+    },
+    
 });
+
+Health.plugin(autoIncrement.plugin,{
+    model: 'Health',
+    field: 'seq',
+    startAt: 0,
+    incrementBy : 1
+});
+
  /*
 ******************************************
 과연 이 User와 Health를 합치는게 맞는가? 
