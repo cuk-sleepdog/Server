@@ -27,12 +27,7 @@ Health.plugin(autoIncrement.plugin,{
     incrementBy : 1
 });
 
- /*
-******************************************
-과연 이 User와 Health를 합치는게 맞는가? 
-분리하는게 더 낫지 않을까?
-****************************************
- */
+
 
 //스키마를 모델로 변환하여 내보내서 다른 파일에서 사용할수있게 한다.
 module.exports = mongoose.model('Health',Health,'Health');
