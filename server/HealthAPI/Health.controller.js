@@ -1,4 +1,4 @@
-const Joi = require('joi');
+// const Joi = require('joi');
 const Health = require('../DBmodel/Health');
 const ObjectId = require('mongoose').Types.ObjectId
 
@@ -96,48 +96,48 @@ exports.Healthdelete = async(ctx) => {
     ctx.status = 204; //정상처리됐다는 응답.
 };
 
-exports.HealthPut = async (ctx) => {
-    const {id} = ctx.params; // URL 파라미터에서 id 값을 읽어온다.
+// exports.HealthPut = async (ctx) => {
+//     const {id} = ctx.params; // URL 파라미터에서 id 값을 읽어온다.
 
-    if(!ObjectId.isValid(id)) {
-        ctx.status = 400; // Bad Request
-        return;
-    }
+//     if(!ObjectId.isValid(id)) {
+//         ctx.status = 400; // Bad Request
+//         return;
+//     }
 
 
-    const schema = Joi.object().keys({
+//     const schema = Joi.object().keys({
 
-        //required() 옵션은 필수 항목, NOT NULL과 동일
-        User: Joi.array().items(Joi.object().keys({
-            KakaoId: Joi.string().email().required(),
-            accessToken: Joi.string().required(),
-            Dogs: Joi.string().required()
-        })),
-        Heat: Joi.number().required(),
-        Heart: Joi.number().required()
-    });
+//         //required() 옵션은 필수 항목, NOT NULL과 동일
+//         User: Joi.array().items(Joi.object().keys({
+//             KakaoId: Joi.string().email().required(),
+//             accessToken: Joi.string().required(),
+//             Dogs: Joi.string().required()
+//         })),
+//         Heat: Joi.number().required(),
+//         Heart: Joi.number().required()
+//     });
 
-    const validation = schema.validate(ctx.request.body);
+//     const validation = schema.validate(ctx.request.body);
 
-    if(validation.error){
-        ctx.status = 400;
-        ctx.body = validation.error;
-        return;
-    }
+//     if(validation.error){
+//         ctx.status = 400;
+//         ctx.body = validation.error;
+//         return;
+//     }
 
-    let healthinfo;
+//     let healthinfo;
 
-    try {
-        healthinfo = await Health.findByIdAndUpdate(id, ctx.request.body,
-        {
-            upsert: true, //데이터가 존재하지않을때 새로만듬
-            new: true // 업데이트 된 데이터를 반환
-        });
-    } catch(e){
-        return ctx.throw(500,e);
-    }
-    ctx.body = healthinfo;
-    };
+//     try {
+//         healthinfo = await Health.findByIdAndUpdate(id, ctx.request.body,
+//         {
+//             upsert: true, //데이터가 존재하지않을때 새로만듬
+//             new: true // 업데이트 된 데이터를 반환
+//         });
+//     } catch(e){
+//         return ctx.throw(500,e);
+//     }
+//     ctx.body = healthinfo;
+//     };
 
     exports.Infoupdate = async (ctx) => {
         const {id} = ctx.params;

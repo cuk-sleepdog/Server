@@ -1,8 +1,7 @@
-const Joi = require('joi');
+// const Joi = require('joi');
 const Petinfo = require('../DBmodel/Petinfo');
 const mongoose = require('mongoose');
 const ObjectId = require('mongoose').Types.ObjectId
-
 
 exports.Petlist = async (ctx) => {
 
@@ -35,7 +34,9 @@ exports.PetPost = async (ctx) => {
         Happy,
         Kind,
         Gender,
-        Weight
+        Weight,
+        Heat,
+        Heart
     } = ctx.request.body; 
 
     const petinfo = new Petinfo({
@@ -44,7 +45,9 @@ exports.PetPost = async (ctx) => {
         Happy,
         Kind,
         Gender,
-        Weight
+        Weight,
+        Heat,
+        Heart
     });
 
     try {
@@ -66,7 +69,8 @@ exports.Petget = async (ctx) => {
     let petinfo;
     
     try {
-        petinfo = await Petinfo.find({Petname: new RegExp(id)}).exec(); //특정아이디 조회
+        // petinfo = await Petinfo.find({PetId: new RegExp(id)}).exec(); string값으로 조회할때 사용
+        petinfo = await Petinfo.find({PetId: id}).exec(); //특정아이디 조회
     } catch(e){
         if(e.name === 'CastError'){
             ctx.status = 400;
@@ -89,7 +93,7 @@ exports.Petdelete = async(ctx) => {
     const {id} = ctx.params;
 
     try {
-        await Petinfo.findByIdAndRemove(id).exec();
+        await Petinfo.findByIdAndRemove( id).exec();
     }
     catch(e){
         if(e.name === 'CastError'){
@@ -100,62 +104,63 @@ exports.Petdelete = async(ctx) => {
     ctx.status = 204; //정상처리됐다는 응답.
 };
 
-exports.PetPut = async (ctx) => {
-    const {id} = ctx.params; // URL 파라미터에서 id 값을 읽어온다.
+// exports.PetPut = async (ctx) => {
+//     const {id} = ctx.params; // URL 파라미터에서 id 값을 읽어온다.
 
-    if(!ObjectId.isValid(id)) {
-        ctx.status = 400; // Bad Request
-        return;
-    }
+//     if(!ObjectId.isValid(id)) {
+//         ctx.status = 400; // Bad Request
+//         return;
+//     }
 
 
-    const schema = Joi.object().keys({
+//     const schema = Joi.object().keys({
 
-        //required() 옵션은 필수 항목, NOT NULL과 동일
-        Petname: Joi.string().required(),
-        Happy: Joi.date(),
-        Kind: Joi.string().required(),
-        Gender: Joi.string().required(),
-        Weight: Joi.number()
+//         //required() 옵션은 필수 항목, NOT NULL과 동일
+//         Petname: Joi.string().required(),
+//         Happy: Joi.date(),
+//         Kind: Joi.string().required(),
+//         Gender: Joi.string().required(),
+//         Weight: Joi.number()
 
-    });
+//     });
 
-    const validation = schema.validate(ctx.request.body);
+//     const validation = schema.validate(ctx.request.body);
 
-    if(validation.error){
-        ctx.status = 400;
-        ctx.body = validation.error;
-        return;
-    }
+//     if(validation.error){
+//         ctx.status = 400;
+//         ctx.body = validation.error;
+//         return;
+//     }
 
-    let petinfo;
+//     let petinfo;
 
-    try {
-        petinfo = await Petinfo.findByIdAndUpdate(id, ctx.request.body,
-        {
-            upsert: true, //데이터가 존재하지않을때 새로만듬
-            new: true // 업데이트 된 데이터를 반환
-        });
-    } catch(e){
-        return ctx.throw(500,e);
-    }
-    ctx.body = petinfo;
-    };
+//     try {
+//         petinfo = await Petinfo.findByIdAndUpdate(id, ctx.request.body,
+//         {
+//             upsert: true, //데이터가 존재하지않을때 새로만듬
+//             new: true // 업데이트 된 데이터를 반환
+//         });
+//     } catch(e){
+//         return ctx.throw(500,e);
+//     }
+//     ctx.body = petinfo;
+//     };
 
     exports.UpdatePet = async (ctx) => {
         const {id} = ctx.params;
-    
-        if(!ObjectId.isValid(id)) {
-            ctx.status = 400; // Bad Request
-            return;
-        }
+        mongoose.Types.ObjectId.isValid(id);
+
+         if(!ObjectId.isValid(id)) {
+             ctx.status = 400; // Bad Request
+             return;
+         }
     
         let Pet;
     
         try {
             // 아이디로 찾아서 업데이트를 합니다.
             // 파라미터는 (아이디, 변경 할 값, 설정) 순 입니다.
-            Pet = await Petinfo.findByIdAndUpdate(id, ctx.request.body, {
+            Pet = await Petinfo.findByIdAndUpdate(id , ctx.request.body, {
                 // upsert 의 기본값은 false이다. PUT과는 다르게 생성된 데이터를 수정하는 것이므로 true로 할 필요가없다.
                 new: true 
             });
@@ -163,7 +168,7 @@ exports.PetPut = async (ctx) => {
             return ctx.throw(500, e);
         }
     
-        ctx.body = Info;
+        ctx.body = Pet;
     };
 
 // 이 파일이랑 PetinfoAPI안에있는 index.js랑 왔다리갔다리 하면서 쓰면된다.

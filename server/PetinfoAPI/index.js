@@ -2,11 +2,6 @@ const Router = require('koa-router');
 const Petinfo = new Router();
 const PetCtrl = require('./Petinfo.controller');
 
-const handler = (ctx, next) =>{
-    ctx.body = `${ctx.request.method} ${ctx.request.path}`; // 현재 쓰인 메소드와 경로 출력
-};
-
-
 
 Petinfo.get('/',PetCtrl.Petlist); // Petinfo.controller.js의 저장된것을 출력
 Petinfo.get('/:id',PetCtrl.Petget); // Petname값으로 골라와서 출력
