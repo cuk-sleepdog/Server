@@ -13,7 +13,7 @@ const Health = new Schema({ //건강상태 데이터베이스
     Temp: Number,
     Bpm: Number,
     Sleep: Number,
-    Date: Number
+    Date: String
 },
 {versionKey: false}
 
