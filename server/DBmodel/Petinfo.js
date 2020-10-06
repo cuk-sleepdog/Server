@@ -19,8 +19,6 @@ const Petinfo = new Schema({ // 반려동물 정보
     Kind : String, // 종류
     Gender : String, // 성별
     Weight : Number, // 몸무게
-    Heat: Number, // 온도
-    Heart: Number, // 심박수
     CreateAt:{ //기본값 설정할땐 꼭 객체로 , 생성날짜
         type: String,
         default: moment(Today).format('YYYY-MM-DD, h:mm:ss a')

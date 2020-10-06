@@ -2,44 +2,22 @@
 const Health = require('../DBmodel/Health');
 const ObjectId = require('mongoose').Types.ObjectId
 
-
-exports.Healthlist = async (ctx) => {
-
-//변수를 미리 만든다.
-
-    let Healthinfo;
-
-    try {
-        //데이터를 조회한다.
-        // .exec() 를 뒤에 붙여줘야 실제로 데이터베이스에 요청이 된다.
-        // 반환값은 Promise이므로 await를 사용할수있다.
-        Healthinfo = await Health.find() // 데이터베이스에 find명령 요청
-                    .sort({_id: 1}) // _id의 역순으로 정렬한다.
-                    .limit(3) //3개만 보여지게 제한
-                    .exec(); //서버에 요청
-    }
-    catch(e) { //에러 처리
-        return ctx.throw(500,e);
-    }
-
-    ctx.body = Healthinfo; // 에러없을시 데이터 가져옴
-
-};
-
 exports.HealthPost = async (ctx) => {
     // request body 에서 값들을 추출한다.
     const {
-        User,
-        Heat,
-        Heart,
-        CreateAt
+        Product,
+        Temp,
+        Bpm,
+        Sleep,
+        date
     } = ctx.request.body; 
 
     const health = new Health({
-        User,
-        Heat,
-        Heart,
-        CreateAt
+        Product,
+        Temp,
+        Bpm,
+        Sleep,
+        date
     });
 
     try {
@@ -62,7 +40,7 @@ exports.Healthget = async (ctx) => {
     let healthinfo;
 
     try {
-        healthinfo = await Health.findById(id).exec(); //특정아이디 조회
+        healthinfo = await Health.find({Product: id}).exec(); //특정아이디 조회
     } catch(e){
         if(e.name === 'CastError'){
             ctx.status = 400;
