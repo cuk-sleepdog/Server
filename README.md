@@ -23,6 +23,10 @@ API | Method | Address
 HealthId 선택해서 건강상태 출력 API | GET | sleepdog.mintpass.kr:3000/Health/:id |
 건강상태 정보삭제 API | DELETE | sleepdog.mintpass.kr:3000/Health/:id |
 
+```
+GET에서만 HealthId사용 가능하며 삭제는 _id사용해야 합니다.
+```
+
 ### POST
 반려동물 정보입력 API
 ```
