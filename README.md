@@ -15,16 +15,15 @@ PetId 선택해서 출력 | GET | sleepdog.mintpass.kr:3000/PetinfoAPI/:id |
 GET에서만 PetId사용 가능하며 수정과 삭제는 _id사용해야 합니다.
 ```
 
-### Health
+### HealthAPI
 API | Method | Address
 :-----|:------:|:------|
-유저정보,건강상태 정보입력 API| POST | sleepdog.mintpass.kr:3000/Health/ |
-건강상태 정보 LIST API | GET | sleepdog.mintpass.kr:3000/Health/ |
-HealthId 선택해서 건강상태 출력 API | GET | sleepdog.mintpass.kr:3000/Health/:id |
-건강상태 정보삭제 API | DELETE | sleepdog.mintpass.kr:3000/Health/:id |
+유저정보,건강상태 정보입력 API| POST | sleepdog.mintpass.kr:3000/HealthAPI/ |
+HealthId 선택해서 건강상태 출력 API | GET | sleepdog.mintpass.kr:3000/HealthAPI/:id |
+건강상태 정보삭제 API | DELETE | sleepdog.mintpass.kr:3000/HealthAPI/:id |
 
 ```
-GET에서만 HealthId사용 가능하며 삭제는 _id사용해야 합니다.
+GET에서만 ProductId사용 가능하며 삭제는 _id사용해야 합니다.(오브젝트id)
 ```
 
 ### POST
@@ -48,12 +47,12 @@ GET에서만 HealthId사용 가능하며 삭제는 _id사용해야 합니다.
 반려동물 건강상태및 수면상태 API
 ```
  {
-   
    "Product": "value", // 목밴드ID
     "Temp": "value", // 온도
     "Bpm": "value", // 심박수
     "Sleep": "value", // 수면상태체크
     "Date": "value" // 생성날짜
+    "Time": "value" //생성시간
  }
 ```
 
