@@ -30,7 +30,7 @@ GET에서만 Product사용 가능하며 DELETE는 _id사용해야 합니다.(오
 반려동물 정보입력 API
 ```
 {
-    "User" : [{
+   "User" : [{
    "KakaoId" : "value" // 카카오 id
    "DOGS" : "value" // 강아지들 이름
    }],
