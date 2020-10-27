@@ -12,7 +12,7 @@ PetId 선택해서 출력 | GET | sleepdog.mintpass.kr:3000/PetinfoAPI/:id |
 반려동물 정보 삭제 API | DELETE | sleepdog.mintpass.kr:3000/PetinfoAPI/:id |
 
 ```
-GET에서만 PetId사용 가능하며 수정과 삭제는 _id사용해야 합니다.
+GET에서만 PetId사용 가능하며 PATCH와 DELETE는 _id사용해야 합니다.(오브젝트id)
 ```
 
 ### HealthAPI
@@ -23,7 +23,7 @@ HealthId 선택해서 건강상태 출력 API | GET | sleepdog.mintpass.kr:3000/
 건강상태 정보삭제 API | DELETE | sleepdog.mintpass.kr:3000/HealthAPI/:id |
 
 ```
-GET에서만 ProductId사용 가능하며 삭제는 _id사용해야 합니다.(오브젝트id)
+GET에서만 Product사용 가능하며 DELETE는 _id사용해야 합니다.(오브젝트id)
 ```
 
 ### POST
