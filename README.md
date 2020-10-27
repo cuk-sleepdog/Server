@@ -30,10 +30,8 @@ GET에서만 Product사용 가능하며 DELETE는 _id사용해야 합니다.(오
 반려동물 정보입력 API
 ```
 {
-   "User" : [{
-   "KakaoId" : "value" // 카카오 id
-   "DOGS" : "value" // 강아지들 이름
-   }],
+    "KakaoId" : "value" // 카카오 id
+    "Dogs" : ["value"], // 강아지들 이
     "Petname" : "value", // 이름
     "Happy" : "value", // 생일
     "Kind" : "value", // 종류
@@ -50,7 +48,7 @@ GET에서만 Product사용 가능하며 DELETE는 _id사용해야 합니다.(오
    "Product": "value", // 목밴드ID 생성시 자동으로 1씩 증가하는 id값
     "Temp": "value", // 온도
     "Bpm": "value", // 심박수
-    "Sleep": "value", // 수면상태체크
+    "CHK": "value", // 수면상태체크
     "Date": "value" // 생성날짜
     "Time": "value" //생성시간
  }
