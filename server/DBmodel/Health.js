@@ -3,10 +3,11 @@ const { Schema } = mongoose; // 몽구스 에서 스키마를 사용한다.
 
 const Health = new Schema({ //건강상태 데이터베이스
     Product: String,
-    Temp: Number,
+    DATE: String,
+    Time: String,
     Bpm: Number,
-    Sleep: Number,
-    Date: String
+    Temp: Number,
+    CHK: Number
 },
 {versionKey: false}
 

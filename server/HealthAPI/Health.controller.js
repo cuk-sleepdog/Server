@@ -1,22 +1,58 @@
 const Health = require('../DBmodel/Health');
 const ObjectId = require('mongoose').Types.ObjectId
 
+exports.chk = async (ctx) => {
+    const {id} = ctx.params;
+    let sleep;
+    try{
+        sleep = await Health.aggregate([
+            { '$match' : { 'Product' : id}},
+            {'$group' : {
+            '_id':"$Product",
+            'Time':{"$first":'$desc'}
+            ,'avg':{'$avg':'$CHK'}
+        }
+    }
+ ]);
+    } //try 괄호
+    catch(e)
+    {
+        return ctx.throw(500, e);
+    }
+    ctx.body = sleep;
+};
+
+
+exports.list = async (ctx) => {
+    let healthinfo;
+
+    try {
+        healthinfo = await Health.find().exec();
+    } catch (e) {
+        return ctx.throw(500, e);
+    }
+ 
+    ctx.body = healthinfo;
+};
+
 exports.HealthPost = async (ctx) => {
     // request body 에서 값들을 추출한다.
     const {
         Product,
-        Temp,
+        DATE,
+        Time,
         Bpm,
-        Sleep,
-        date
+        Temp,
+        CHK
     } = ctx.request.body; 
 
     const health = new Health({
         Product,
-        Temp,
+        DATE,
+        Time,
         Bpm,
-        Sleep,
-        date
+        Temp,
+        CHK
     });
 
     try {
