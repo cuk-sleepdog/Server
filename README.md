@@ -18,8 +18,9 @@ GET에서만 PetId사용 가능하며 PATCH와 DELETE는 _id사용해야 합니�
 ### HealthAPI
 API | Method | Address
 :-----|:------:|:------|
+건강상태 리스트 가져오는 API | GET | sleepdog.mintpass.kr:3000/HealthAPI/ |
 유저정보,건강상태 정보입력 API| POST | sleepdog.mintpass.kr:3000/HealthAPI/ |
-Product 선택해서 건강상태 출력 API | GET | sleepdog.mintpass.kr:3000/HealthAPI/:id |
+평균값 가져오는 API | GET | sleepdog.mintpass.kr:3000/HealthAPI/:id |
 건강상태 정보삭제 API | DELETE | sleepdog.mintpass.kr:3000/HealthAPI/:id |
 
 ```
@@ -44,12 +45,12 @@ GET에서만 Product사용 가능하며 DELETE는 _id사용해야 합니다.(오
 반려동물 건강상태및 수면상태 API
 ```
  {
-   "Product": "value", // 목밴드ID 생성 시 자동으로 1씩 증가하는 id값
-    "Temp": "value", // 온도
+    "Product": "value", // 목밴드ID 생성 시 자동으로 1씩 증가하는 id값
+    "DATE": "value", // 생성날짜
+    "Time": "value", // 생성시간
     "Bpm": "value", // 심박수
-    "CHK": "value", // 수면상태체크
-    "Date": "value", // 생성날짜
-    "Time": "value" //생성시간
+    "Temp": "value", // 체온
+    "CHK": "value" // 수면상태 체크
  }
 ```
 
