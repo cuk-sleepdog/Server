@@ -1,25 +1,42 @@
 const Health = require('../DBmodel/Health');
 const ObjectId = require('mongoose').Types.ObjectId
 
+exports.del = async (ctx) => {
+	  
+	  try{
+		      await Health.remove({});
+	  }
+	catch(e)
+	{
+		if(e.name === 'CastError') {
+			ctx.status = 400;
+			return;
+		}
+	}
+	ctx.status = 204;
+};
+
 exports.chk = async (ctx) => {
     const {id} = ctx.params;
     let sleep;
     try{
         sleep = await Health.aggregate([
             { '$match' : { 'Product' : id}},
-            {'$group' : {
-            '_id':"$Product",
-            'Time':{"$first":'$desc'}
-            ,'avg':{'$avg':'$CHK'}
-        }
-    }
+	{ '$group': {
+		'_id':{'Product':'$Product'},
+		'CHK_avg':{'$avg':'$CHK'},
+		'Bpm_avg':{'$avg':'$Bpm'},
+		'Temp_avg':{'$avg':'$Temp'}
+	}}	    
  ]);
     } //try 괄호
     catch(e)
     {
         return ctx.throw(500, e);
     }
-    ctx.body = sleep;
+	
+   ctx.body = sleep;
+	return ;
 };
 
 
@@ -33,6 +50,7 @@ exports.list = async (ctx) => {
     }
  
     ctx.body = healthinfo;
+	return;
 };
 
 exports.HealthPost = async (ctx) => {
@@ -65,7 +83,7 @@ exports.HealthPost = async (ctx) => {
 
     //저장한 결과를 반환한다.
     ctx.body = health;
-
+	return;
 };
 
 exports.Healthget = async (ctx) => {
@@ -92,22 +110,23 @@ exports.Healthget = async (ctx) => {
     }
 
     ctx.body = healthinfo;
+	return;
 };
 
-exports.Healthdelete = async(ctx) => {
-    const {id} = ctx.params;
+// exports.Healthdelete = async(ctx) => {
+//    const {id} = ctx.params;
 
-    try {
-        await Health.findByIdAndRemove(id).exec();
-    }
-    catch(e){
-        if(e.name === 'CastError'){
-            ctx.status = 400;
-            return;
-        }
-    }
-    ctx.status = 204; //정상처리됐다는 응답.
-};
+//    try {
+//        await Health.findByIdAndRemove(id).exec();
+//    }
+//    catch(e){
+//       if(e.name === 'CastError'){
+//            ctx.status = 400;
+//            return;
+//        }
+//    }
+//    ctx.status = 204; //정상처리됐다는 응답.
+//};
 
     exports.Infoupdate = async (ctx) => {
         const {id} = ctx.params;
@@ -131,5 +150,6 @@ exports.Healthdelete = async(ctx) => {
         }
     
         ctx.body = Info;
+    	return;
     };
 

@@ -1,13 +1,23 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose; // 몽구스 에서 스키마를 사용한다.
+const Today = new Date();
+const moment = require('moment');
+require('moment-timezone');
+moment.tz.setDefault("Asia/Seoul");
 
 const Health = new Schema({ //건강상태 데이터베이스
     Product: String,
-    DATE: String,
-    Time: String,
     Bpm: Number,
     Temp: Number,
-    CHK: Number
+    CHK: Number,
+    DATE: {
+    	type: String,
+	default: moment(Today).format('YYYY-MM-DD')
+    }, 
+    Time: {
+	type: String,
+	default: moment(Today).format('HH:mm')
+    }
 },
 {versionKey: false}
 
