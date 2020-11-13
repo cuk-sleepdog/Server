@@ -59,6 +59,10 @@ GET에서만 Product사용 가능하며 DELETE는 _id사용해야 합니다.(오
 {
     "_id"{"Product": "value"}, //목밴드ID
     "Time" : "value",
-    "avg" : "value" // CHK의 평균값
+    "CHK_avg" : "value" // 수면상태 평균값
+    "Bpm_avg": "value" // 심박수 평균값
+    "Temp_avg" "value" // 체온 평균값
 }
 ```
+
+
