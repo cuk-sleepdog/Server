@@ -23,12 +23,14 @@ exports.chk = async (ctx) => {
         sleep = await Health.aggregate([
             { '$match' : { 'Product' : id}},
 	{ '$group': {
-		'_id':{'Product':'$Product'},
-		'CHK_avg':{'$avg':'$CHK'},
-		'Bpm_avg':{'$avg':'$Bpm'},
-		'Temp_avg':{'$avg':'$Temp'}
-	}}	    
- ]);
+        '_id':{
+            'Product':'$Product'},
+            'CHK_avg':{'$avg':'$CHK'},
+            'Bpm_avg':{'$avg':'$Bpm'},
+            'Temp_avg':{'$avg':'$Temp'}
+            }
+        },
+    ]);
     } //try 괄호
     catch(e)
     {
