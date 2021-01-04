@@ -141,8 +141,8 @@ exports.Healthget = async (ctx) => {
         let Info;
     
         try {
-            // 아이디로 찾아서 업데이트를 합니다.
-            // 파라미터는 (아이디, 변경 할 값, 설정) 순 입니다.
+            // 아이디로 찾아서 업데이트 한다
+            // 파라미터는 (아이디, 변경 할 값, 설정)
             Info = await Health.findByIdAndUpdate(id, ctx.request.body, {
                 // upsert 의 기본값은 false이다. PUT과는 다르게 생성된 데이터를 수정하는 것이므로 true로 할 필요가없다.
                 new: true 
