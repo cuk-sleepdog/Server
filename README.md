@@ -11,9 +11,6 @@ PetId 선택해서 출력 | GET | http://sleepdog.mintpass.kr:3000/PetinfoAPI/:i
 반려동물 정보수정 API | PATCH | http://sleepdog.mintpass.kr:3000/PetinfoAPI/:id |
 반려동물 정보 삭제 API | DELETE | http://sleepdog.mintpass.kr:3000/PetinfoAPI/:id |
 
-```
-GET에서만 PetId사용 가능하며 PATCH와 DELETE는 _id사용해야 합니다.(오브젝트id)
-```
 
 ### HealthAPI
 API | Method | Address
@@ -23,9 +20,6 @@ API | Method | Address
 평균값 가져오는 API | GET | http://sleepdog.mintpass.kr:3000/HealthAPI/:id |
 건강상태 정보전체삭제 API | DELETE | http://sleepdog.mintpass.kr:3000/HealthAPI/ |
 
-```
-GET에서만 Product사용 가능하며 DELETE는 _id사용해야 합니다.(오브젝트id)
-```
 
 ### POST
 반려동물 정보입력 API
