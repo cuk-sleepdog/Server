@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 
 const Koa = require('koa');
 const Router = require('koa-router');
-const { ObjectID } = require('mongodb');
 const app = new Koa();
 const router = new Router();
 const PetinfoAPI = require('./PetinfoAPI'); // PetinfoAPI 폴더에서 라우터 요청
