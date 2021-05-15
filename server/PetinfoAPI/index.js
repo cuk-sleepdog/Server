@@ -1,14 +1,14 @@
 const Router = require('koa-router');
-const Petinfo = new Router();
-const PetCtrl = require('./Petinfo.controller');
+const petInfo = new Router();
+const PetCtrl = require('./petInfoController');
 
 
-Petinfo.get('/',PetCtrl.Petlist); // Petinfo.controller.js의 저장된것을 출력
-Petinfo.get('/:id',PetCtrl.Petget); // Petname값으로 골라와서 출력
-Petinfo.post('/',PetCtrl.PetPost); // Petinfo 정보 입력
-Petinfo.delete('/:id',PetCtrl.Petdelete); // Petinfo 데이터 삭제
-Petinfo.patch('/:id',PetCtrl.UpdatePet); // Petinfo 정보 수정
+petInfo.get('/',PetCtrl.PetList); // petInfo.controller.js의 저장된것을 출력
+petInfo.get('/:id',PetCtrl.PetGet); // id값으로 골라와서 출력
+petInfo.post('/',PetCtrl.PetPost); // petInfo 정보 입력
+petInfo.delete('/:id',PetCtrl.PetDelete); // petInfo 데이터 삭제
+petInfo.patch('/:id',PetCtrl.UpdatePet); // petInfo 정보 수정
 
-module.exports = Petinfo;
+module.exports = petInfo;
 
 //여기서 설정된걸 server index.js 에서 가져다 쓴다.

@@ -1,21 +1,21 @@
 const Health = require('../DBmodel/Health');
 const ObjectId = require('mongoose').Types.ObjectId
 
-exports.del = async (ctx) => {
+exports.AllDelete = async (ctx) => {
 
     try {
         await Health.remove({});
+        return ctx.status = 204;
     }
     catch (e) {
         if (e.name === 'CastError') {
-            ctx.status = 400;
-            return;
+            return ctx.status = 400;
+            
         }
     }
-    ctx.status = 204;
 };
 
-exports.chk = async (ctx) => {
+exports.CheckHealth = async (ctx) => {
     const { id } = ctx.params;
     let sleep;
     try {
@@ -37,22 +37,21 @@ exports.chk = async (ctx) => {
         return ctx.throw(500, e);
     }
 
-    ctx.body = sleep;
-    return;
+    return ctx.body = sleep;
 };
 
 
-exports.list = async (ctx) => {
-    let healthinfo;
+exports.ShowList = async (ctx) => {
+    let healthInfo;
 
     try {
-        healthinfo = await Health.find().exec();
+        healthInfo = await Health.find().exec();
     } catch (e) {
         return ctx.throw(500, e);
     }
 
-    ctx.body = healthinfo;
-    return;
+    return ctx.body = healthInfo;
+    
 };
 
 exports.HealthPost = async (ctx) => {
@@ -84,18 +83,18 @@ exports.HealthPost = async (ctx) => {
     }
 
     //저장한 결과를 반환한다.
-    ctx.body = health;
-    return;
+    return ctx.body = health;
+    
 };
 
-exports.Healthget = async (ctx) => {
+exports.HealthGet = async (ctx) => {
     const { id } = ctx.params; //URL 파라미터에서 id값을 읽어온다.
     // Users의 KakaoId로 조회할수있게 수정해야함.
 
-    let healthinfo;
+    let healthInfo;
 
     try {
-        healthinfo = await Health.find({ Product: id }).exec(); //특정아이디 조회
+        healthInfo = await Health.find({ Product: id }).exec(); //특정아이디 조회
     } catch (e) {
         if (e.name === 'CastError') {
             ctx.status = 400;
@@ -104,46 +103,42 @@ exports.Healthget = async (ctx) => {
         return ctx.throw(500, e);
     }
 
-    if (!healthinfo) {
+    if (!healthInfo) {
         //일치하는 id가 없으면
         ctx.status = 404;
-        ctx.body = { message: 'healthinfo Not found' };
-        return;
+        return ctx.body = { message: 'healthInfo Not found' };
     }
 
-    ctx.body = healthinfo;
-    return;
+    return ctx.body = healthInfo;
 };
 
-// exports.Healthdelete = async(ctx) => {
-//    const {id} = ctx.params;
+exports.Healthdelete = async(ctx) => {
+    const {id} = ctx.params;
 
-//    try {
-//        await Health.findByIdAndRemove(id).exec();
-//    }
-//    catch(e){
-//       if(e.name === 'CastError'){
-//            ctx.status = 400;
-//            return;
-//        }
-//    }
-//    ctx.status = 204; //정상처리됐다는 응답.
-//};
+    try {
+        await Health.findByIdAndRemove(id).exec();
+    }
+    catch(e){
+        if(e.name === 'CastError'){
+            return ctx.status = 400;
+        }
+    }
+   ctx.status = 204; //정상처리됐다는 응답.
+};
 
-exports.Infoupdate = async (ctx) => {
+exports.InfoUpdate = async (ctx) => {
     const { id } = ctx.params;
 
     if (!ObjectId.isValid(id)) {
-        ctx.status = 400; // Bad Request
-        return;
+        return ctx.status = 400; // Bad Request
     }
 
-    let Info;
+    let info;
 
     try {
         // 아이디로 찾아서 업데이트 한다
         // 파라미터는 (아이디, 변경 할 값, 설정)
-        Info = await Health.findByIdAndUpdate(id, ctx.request.body, {
+        info = await Health.findByIdAndUpdate(id, ctx.request.body, {
             // upsert 의 기본값은 false이다. PUT과는 다르게 생성된 데이터를 수정하는 것이므로 true로 할 필요가없다.
             new: true
         });
@@ -151,7 +146,6 @@ exports.Infoupdate = async (ctx) => {
         return ctx.throw(500, e);
     }
 
-    ctx.body = Info;
-    return;
+    return ctx.body = info;
 };
 

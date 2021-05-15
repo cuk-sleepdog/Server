@@ -11,7 +11,7 @@ const Health = new Schema({ //건강상태 데이터베이스
     Temp: Number,
     CHK: Number,
     DATE: {
-    	type: String,
+        type: String,
 	default: moment(Today).format('YYYY-MM-DD')
     }, 
     Time: {
@@ -23,14 +23,7 @@ const Health = new Schema({ //건강상태 데이터베이스
 
 );
 
-
-
-
-
 //스키마를 모델로 변환하여 내보내서 다른 파일에서 사용할수있게 한다.
-module.exports = mongoose.model('Health',Health,'Health');
-
 // 첫번째는 스키마의 이름, 두번째는 스키마 객체가 필요하다.
-// mongoose.model('Book', Book, 'Book'); 이라고하면 몽고디비의 컨벤션을 따르지않고 Book으로 만들수있다.
-
-//이 파일은 몽고DB에 데이터를 쓸수있도록 만든 파일이다.
+// 세번쨰를 지정하지않으면 복수형으로 이름이 바뀌지만 세번째 이름을 지정하면 해당 이름으로 지정된다.
+module.exports = mongoose.model('Health',Health,'Health');
