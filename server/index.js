@@ -5,8 +5,8 @@ const Koa = require('koa');
 const Router = require('koa-router');
 const app = new Koa();
 const router = new Router();
-const petInfoAPI = require('./petInfoAPI'); // petInfoAPI 폴더에서 라우터 요청
-const healthAPI = require('./healthAPI');
+const petInfoAPI = require('./PetInfoAPI'); // petInfoAPI 폴더에서 라우터 요청
+const healthAPI = require('./HealthAPI');
 const bodyParser = require('koa-bodyparser'); // koa-bodyparser 사용하기위해 선언
 
 const port = process.env.PORT || 3000; //PORT값이 설정 안되어있으면 4040쓴다.
