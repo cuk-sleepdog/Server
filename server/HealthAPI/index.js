@@ -1,6 +1,6 @@
 const Router = require('koa-router');
 const Health = new Router();
-const HealthCtrl = require('./Health.controller');
+const HealthCtrl = require('./HealthController');
 
 Health.get('/',HealthCtrl.ShowList);
 Health.get('/:id',HealthCtrl.HealthGet); // 원하는 id 건강상태 리스트 가져오기 
