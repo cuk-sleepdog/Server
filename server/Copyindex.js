@@ -10,5 +10,3 @@ petInfo.delete('/:id',PetCtrl.PetDelete); // petInfo 데이터 삭제
 petInfo.patch('/:id',PetCtrl.UpdatePet); // petInfo 정보 수정
 
 module.exports = petInfo;
-
-//여기서 설정된걸 server index.js 에서 가져다 쓴다.
